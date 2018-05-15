@@ -5,8 +5,8 @@
 
 #ifndef CUDAKERNEL
 #include <malloc.h>
-#include "options.h"
-#include "formats.h"
+//#include "options.h"
+//#include "formats.h"
 #define CCALLING
 #define DBGLVLTEST	debugVirbosity
 #else
@@ -190,22 +190,31 @@ EXTERN CCALLING unsigned char debugSetDBLevel( int DesiredLevel );
 	
 
 // variables
+#ifdef WINDOZE
+EXTERN unsigned __int64 debugheapstart INITIZERO;
+EXTERN unsigned __int64 debugheapend INITIZERO;
+EXTERN unsigned __int64 debugstackstart INITIZERO;
+EXTERN unsigned __int64 debugstackend INITIZERO;
+#else	// WINDOZE
 EXTERN unsigned long long int debugheapstart INITIZERO;
 EXTERN unsigned long long int debugheapend INITIZERO;
 EXTERN unsigned long long int debugstackstart INITIZERO;
 EXTERN unsigned long long int debugstackend INITIZERO;
+#endif	// WINDOZE
 EXTERN unsigned char debugVirbosity INITIZERO;
 EXTERN unsigned char debugInitialVirbosity INITIZERO;
 #ifdef DEBUGMAIN
 EXTERN CCALLING char *sDebugTrueFalse[2] = { "False" , "True" };
-#else
+#else	// DEBUGMAIN
 EXTERN CCALLING char *sDebugTrueFalse[2];
-#endif
+#endif	// DEBUGMAIN
 
 // If ColorDebug is set to true (non-zero), the debug output device is assumed to interpret ansi escape
 // codes and debug output will be colorized.
 // If ColorDebug is zero (default) no ansi escape sequences will be sent to the debug output device.
 EXTERN int ColorDebug INITIZERO;
+
+EXTERN FILE *fp9 INITNULL;
 
 #define DIMDEBUGDEVICES		7
 #define FILEOUTPUT 0
