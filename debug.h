@@ -1,5 +1,5 @@
-#ifndef _JOHN_DEBUG_H
-#define _JOHN_DEBUG_H
+#ifndef _DEBUG_H
+#define _DEBUG_H
 
 #ifdef DEBUG
 
@@ -472,4 +472,4 @@ EXTERN unsigned char bdebug_flag_set[NUMDEBUGFLAGS] INITSZERO;
 #define DBGRESETALLATTRIBUTESLEN	0
 
 #endif  //    fi DEBUG
-#endif  //    fi _JOHN_DEBUG_H
+#endif  //    fi _DEBUG_H
