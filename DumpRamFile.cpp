@@ -18,7 +18,7 @@
 
 #include "debug.h"
 #include "debug01.h"
-
+#include <string.h>
 
 void DumpRamFile(char **lpHeapFile)
 {

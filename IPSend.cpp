@@ -18,7 +18,7 @@
 
 #include "debug.h"
 #include "debug01.h"
-
+#include <string.h>
 
 int IPSend(char * Buffer, int MaxDataSize) {
 	int retval = 0;

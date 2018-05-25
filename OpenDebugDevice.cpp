@@ -18,7 +18,7 @@
 
 #include "debug.h"
 #include "debug01.h"
-
+#include <string.h>
 
 int OpenDebugDevice()
 {
@@ -162,8 +162,8 @@ int OpenDebugDevice()
 	  case TCPPORT:
 
 			if (OpenTCPport()==0) return 0;
-			if ( ClearDebugScreenOnExit > 1 ) if ( ColorDebug ) IPSend(DBGHOMECURSOR DBGCLRSCR, DBGHOMECURSORLEN + DBGCLRSCRLEN + 2);
-			if ( ColorDebug ) IPSend(DBGRESETALLATTRIBUTES, DBGRESETALLATTRIBUTESLEN + 2);		
+			if ( ClearDebugScreenOnExit > 1 ) if ( ColorDebug ) IPSend((char *)(DBGHOMECURSOR DBGCLRSCR), DBGHOMECURSORLEN + DBGCLRSCRLEN + 2);
+			if ( ColorDebug ) IPSend((char *)(DBGRESETALLATTRIBUTES), DBGRESETALLATTRIBUTESLEN + 2);
 
 			break;
 

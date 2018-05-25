@@ -18,7 +18,8 @@
 
 #include "debug.h"
 #include "debug01.h"
-
+#include <assert.h>
+#include <string.h>
 
 int Dbgprintf(int linenum, const char * modulename, unsigned int debugflag, const char * fmt,...)
 {

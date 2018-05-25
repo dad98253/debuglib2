@@ -18,7 +18,7 @@
 
 #include "debug.h"
 #include "debug01.h"
-
+#include <string.h>
 
 #define RANGE1(x) (((x) > 63 && (x) < 96 ) ? true : false )
 #define RANGE2(x) (((x) > 63 && (x) < 127 ) ? true : false )

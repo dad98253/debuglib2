@@ -18,7 +18,9 @@
 
 #include "debug.h"
 #include "debug01.h"
-
+#define FROM_DEBUGLIB2
+#include "tutlib.h"
+#include <malloc.h>
 
 int debug_init () 
 {
@@ -40,8 +42,8 @@ int debug_init ()
 	if (retvalue) return(retvalue);
 //char str[LENTEMPSTR];
 //char tmpstr[LENTEMPSTR];
-	str=malloc(LENTEMPSTR);
-	tmpstr=malloc(LENTEMPSTR);
+	str=(char *)malloc(LENTEMPSTR);
+	tmpstr=(char *)malloc(LENTEMPSTR);
 	bOutputDP = bIsStdinTty = isatty(STDIN_FILENO);
 	return(0);
 }

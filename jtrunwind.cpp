@@ -18,6 +18,9 @@
 
 #include "debug.h"
 #include "debug01.h"
+#include <libunwind.h>
+#include <string.h>
+
 
 
 char * jtrunwind (int icall) {

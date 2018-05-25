@@ -14,7 +14,7 @@
 #pragma comment( user, "File: " __FILE__ ". Compiled on " __DATE__ " at " __TIME__ ".  Last modified on " __TIMESTAMP__ )
 #endif
 
-#define DEBUG
+//#define DEBUG
 #include <stdio.h>
 //#include "lindows.h"
 //#include "passwin.h"

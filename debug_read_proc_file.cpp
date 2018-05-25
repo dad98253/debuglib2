@@ -18,6 +18,8 @@
 
 #include "debug.h"
 #include "debug01.h"
+#include <stdlib.h>
+#include <string.h>
 
 
 

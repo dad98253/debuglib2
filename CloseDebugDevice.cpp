@@ -80,8 +80,8 @@ int CloseDebugDevice()
 
 	  case TCPPORT:
 
-		if ( ClearDebugScreenOnExit%2 && !bMyWay ) if ( ColorDebug ) IPSend(DBGHOMECURSOR DBGCLRSCR, DBGHOMECURSORLEN + DBGCLRSCRLEN + 2);
-		if ( ColorDebug ) IPSend(DBGRESETALLATTRIBUTES, DBGRESETALLATTRIBUTESLEN + 2);	
+		if ( ClearDebugScreenOnExit%2 && !bMyWay ) if ( ColorDebug ) IPSend((char *)(DBGHOMECURSOR DBGCLRSCR), DBGHOMECURSORLEN + DBGCLRSCRLEN + 2);
+		if ( ColorDebug ) IPSend((char *)(DBGRESETALLATTRIBUTES), DBGRESETALLATTRIBUTESLEN + 2);
 		ClosePort();
 
 		break;

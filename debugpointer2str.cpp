@@ -34,12 +34,12 @@ char * debugpointer2str ( void *x )
 
 	if ( uP1 == 0 ) return(isnil);	// -nil- pointer (bad boy)
 	debug_read_proc_file(0);	// get current heap and stack limits
-	if (  uP1 < debugheapend ) {
+	if (  uP1 < (intptr_t)debugheapend ) {
 		snprintf(msg, MAXDP2STR, "0x%016lx", uP1);
 		return(msg);	// pointer less than end of heap (good boy)
 	}
-	if ( uP1 > debugstackend ) return(iswildh);	// pointer above end of syack (bad boy)
-	if ( uP1 > debugstackstart ) {
+	if ( uP1 > (intptr_t)debugstackend ) return(iswildh);	// pointer above end of syack (bad boy)
+	if ( uP1 > (intptr_t)debugstackstart ) {
 		snprintf(msg, MAXDP2STR, "0x%016lx", uP1);
 		return(msg);	// pointer less than end of stack and above start of stack (good boy)
 	}

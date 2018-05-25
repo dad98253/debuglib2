@@ -19,18 +19,89 @@
 #define INITNEGDONE	=-1
 #endif
 
+#ifndef WINDOZE
+#define _MSC_VER	0
+#endif
+
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
+
+#ifdef WINDOZE
+// Windows Header Files:
+#include <windows.h>
+#define UNUSED(x) x
+#else	// WINDOZE
+// Linux Header Files:
+#include "lindows.h"
+#endif	// WINDOZE
+
+#ifdef WINDOZE
+#define WIN32_LEAN_AND_MEAN
+#include <winsock2.h>
+#else
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <errno.h>
+#include <ctype.h>
+#endif
+
 #ifndef bool
     #define bool int
     #define false ((bool)0)
     #define true  ((bool)1)
 #endif
 
+#define DEFAULT_PORT 5001
+#ifdef WINDOZE
+#define DEFAULT_PROTO SOCK_DGRAM // UDP
+#else
+#define DEFAULT_PROTO 2
+//#define DEFAULT_PROTO SOCK_DGRAM // UDP
+//#define INVALID_SOCKET	-1
+#define SOCKET_ERROR	-1
+#endif
+
 //#define MIN(x, y) (((x) > (y)) ? (y) : (x))    //  defined in getopt.h
 
+struct sockaddr_in server;
+struct hostent *hp;
+#ifdef WINDOZE
+WSADATA wsaData;
+SOCKET  conn_socket;
+#else
+int  conn_socket;
+extern int h_errno;
+#endif
+unsigned int addr;
+char *server_name;
+unsigned short port = DEFAULT_PORT;
+int socket_type = DEFAULT_PROTO;
+//int socket_type = SOCK_DGRAM;
+//int socket_type = DEFAULT_PROTO;
 //FILE *hf;
 #define LENTEMPSTR	10000
 char *str;
 char *tmpstr;
+// static variables
+bool fDebug = TRUE;
+bool bMyWay = TRUE;
+HANDLE hCom;
+HANDLE hStdout, hStdin, hStderr;
+char * lpHeapFile;
+int iStartOfHeapFile;
+FILE *hpfile;
+HANDLE hConsoleBuffer;
+CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
+pid_t mypid;
+pid_t myppid;
+
 
 
 EXTERN char * lpDebugOutputFileName;
@@ -70,8 +141,6 @@ EXTERN int ClearDebugScreenOnExit;
 // ClearDebugScreenOnExit == anything else => don't clear the screen
 #define BADUPRSTRCCALL		1
 #define SUCCESS			0
-
-
 
 // functions
 int OpenTCPport(void);
