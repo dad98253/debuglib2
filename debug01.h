@@ -68,41 +68,86 @@
 #define SOCKET_ERROR	-1
 #endif
 
-//#define MIN(x, y) (((x) > (y)) ? (y) : (x))    //  defined in getopt.h
+#define MIN(x, y) (((x) > (y)) ? (y) : (x))
 
-struct sockaddr_in server;
-struct hostent *hp;
+EXTERN struct sockaddr_in server;
+EXTERN struct hostent *hp;
 #ifdef WINDOZE
-WSADATA wsaData;
-SOCKET  conn_socket;
+EXTERN WSADATA wsaData;
+EXTERN SOCKET  conn_socket;
 #else
-int  conn_socket;
+EXTERN int  conn_socket;
 extern int h_errno;
 #endif
-unsigned int addr;
-char *server_name;
+EXTERN unsigned int addr;
+EXTERN char *server_name;
+
+#ifdef DEBUGMAIN
 unsigned short port = DEFAULT_PORT;
 int socket_type = DEFAULT_PROTO;
 //int socket_type = SOCK_DGRAM;
 //int socket_type = DEFAULT_PROTO;
-//FILE *hf;
-#define LENTEMPSTR	10000
-char *str;
-char *tmpstr;
-// static variables
 bool fDebug = TRUE;
 bool bMyWay = TRUE;
-HANDLE hCom;
-HANDLE hStdout, hStdin, hStderr;
-char * lpHeapFile;
-int iStartOfHeapFile;
-FILE *hpfile;
-HANDLE hConsoleBuffer;
-CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
-pid_t mypid;
-pid_t myppid;
+#else	// DEBUGMAIN
+EXTERN unsigned short port;
+EXTERN int socket_type;
+EXTERN bool fDebug;
+EXTERN bool bMyWay;
+#endif	// DEBUGMAIN
+#define LENTEMPSTR	10000
+EXTERN char *str;
+EXTERN char *tmpstr;
+// static variables
+//FILE *hf;
+EXTERN HANDLE hCom;
+EXTERN HANDLE hStdout, hStdin, hStderr;
+EXTERN char * lpHeapFile;
+EXTERN int iStartOfHeapFile;
+EXTERN FILE *hpfile;
+EXTERN HANDLE hConsoleBuffer;
+EXTERN CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
+EXTERN pid_t mypid;
+EXTERN pid_t myppid;
 
+#if ARCH_INT_GT_32
+typedef unsigned short ARCH_WORD_32;
+typedef unsigned int ARCH_WORD_64;
+#else	// ARCH_INT_GT_32
+typedef unsigned int ARCH_WORD_32;
+#ifdef WINDOZE
+typedef unsigned __int64 ARCH_WORD_64;
+#else	// WINDOZE
+typedef unsigned long long ARCH_WORD_64;
+#endif	// WINDOZE
+#endif	// ARCH_INT_GT_32
 
+typedef ARCH_WORD_64 opt_flags;
+/*
+ * Structure with debug option flags and all the parameters.
+ */
+typedef struct {
+/* Option flags */
+	opt_flags flags;
+
+	/* Password files */
+	struct list_main *passwd;
+
+#ifdef DEBUG
+/* debug options */
+	unsigned int debug_level;
+	struct list_main *debug_flags;
+	char * debug_server_name;
+	unsigned int degug_port_number;
+	char * debug_filename;
+	char * debug_device;
+	unsigned int debug_color_flag;
+	unsigned int debug_clear_screen;
+	struct list_main *debug_mask_messages;
+	struct list_main *debug_display_messages;
+#endif
+
+} DEBUGOPTIONSTYPE;
 
 EXTERN char * lpDebugOutputFileName;
 // lpDebugOutputFileName is the optional name for the debug output file.
@@ -162,13 +207,12 @@ void ScrollScreenBuffer(HANDLE, INT);
 int ReAllocateCharVector(unsigned char **p, int length);
 
 
-
-
-
-
-
-
-
-
+#undef EXTERN
+#undef INITIZERO
+#undef INITSZERO
+#undef INITBOOLFALSE
+#undef INITBOOLTRUE
+#undef INITNULL
+#undef INITNEGDONE
 
 #endif	// _DEBUG01_H

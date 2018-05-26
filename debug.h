@@ -10,9 +10,18 @@
 #define CCALLING
 #define DBGLVLTEST	debugVirbosity
 #else
-#define CCALLING	"C"
+//#define CCALLING	"C"
+#define CCALLING
 #define DBGLVLTEST	debugVirbosity
 #endif
+
+#undef EXTERN
+#undef INITIZERO
+#undef INITSZERO
+#undef INITBOOLFALSE
+#undef INITBOOLTRUE
+#undef INITNULL
+#undef INITNEGDONE
 
 #ifndef DEBUGMAIN
 #define EXTERN		extern
@@ -49,7 +58,8 @@
 #endif
 
 // functions
-EXTERN CCALLING int debug_init ();
+EXTERN CCALLING int debug_init (void **debug_options_struct );
+EXTERN CCALLING int set_debug_device (char * devicetype );
 EXTERN CCALLING void load_debug ();
 EXTERN CCALLING void debug_close ();
 EXTERN CCALLING int Dbgprintf(int linenum, const char * modulename, unsigned int debugflag, const char * fmt,...);
@@ -204,7 +214,7 @@ EXTERN unsigned long long int debugstackend INITIZERO;
 EXTERN unsigned char debugVirbosity INITIZERO;
 EXTERN unsigned char debugInitialVirbosity INITIZERO;
 #ifdef DEBUGMAIN
-EXTERN CCALLING char *sDebugTrueFalse[2] = { "False" , "True" };
+EXTERN CCALLING char *sDebugTrueFalse[2] = { (char*)"False" , (char*)"True" };
 #else	// DEBUGMAIN
 EXTERN CCALLING char *sDebugTrueFalse[2];
 #endif	// DEBUGMAIN
@@ -472,4 +482,13 @@ EXTERN unsigned char bdebug_flag_set[NUMDEBUGFLAGS] INITSZERO;
 #define DBGRESETALLATTRIBUTESLEN	0
 
 #endif  //    fi DEBUG
+
+#undef EXTERN
+#undef INITIZERO
+#undef INITSZERO
+#undef INITBOOLFALSE
+#undef INITBOOLTRUE
+#undef INITNULL
+#undef INITNEGDONE
+
 #endif  //    fi _DEBUG_H

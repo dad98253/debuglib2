@@ -15,17 +15,25 @@
 #pragma comment( user, "File: " __FILE__ ". Compiled on " __DATE__ " at " __TIME__ ".  Last modified on " __TIMESTAMP__ )
 #endif
 
-
+#define DEBUGMAIN
 #include "debug.h"
 #include "debug01.h"
 #define FROM_DEBUGLIB2
 #include "tutlib.h"
 #include <malloc.h>
 
-int debug_init () 
+DEBUGOPTIONSTYPE *dbgoptions;
+
+int debug_init ( void **debug_options_struct)
 {
 	int truesize;
 	int retvalue = 0;
+	if ( *debug_options_struct == NULL ) {
+		printf(" error in debug_init call \n");
+		return (-1);
+	}
+	dbgoptions = (DEBUGOPTIONSTYPE *)debug_options_struct;
+	iDebugOutputDevice = 4;
 	debug_read_proc_file(0);
 //fprintf(stderr,"debugheapstart = %llx, debugheapend = %llx, debugstackstart = %llx, debugstackend = %llx\n",debugheapstart, debugheapend, debugstackstart, debugstackend);
 //exit(EXIT_FAILURE);
