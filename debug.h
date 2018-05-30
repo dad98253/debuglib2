@@ -4,16 +4,22 @@
 #ifdef DEBUG
 
 #ifndef CUDAKERNEL
+#ifndef BSD
 #include <malloc.h>
+#else	// BSD
+#include <stdlib.h>
+#define _WITH_GETLINE
+#include <stdio.h>
+#endif	// BSD
 //#include "options.h"
 //#include "formats.h"
 #define CCALLING
 #define DBGLVLTEST	debugVirbosity
-#else
+#else	// CUDAKERNEL
 //#define CCALLING	"C"
 #define CCALLING
 #define DBGLVLTEST	debugVirbosity
-#endif
+#endif	// CUDAKERNEL
 
 #undef EXTERN
 #undef INITIZERO
@@ -31,7 +37,7 @@
 #define INITBOOLTRUE
 #define INITNULL
 #define INITNEGDONE
-#else
+#else	// DEBUGMAIN
 #define EXTERN
 #define INITIZERO	=0
 #define INITSZERO	={0}
@@ -39,23 +45,23 @@
 #define INITBOOLTRUE	=true
 #define INITNULL	=NULL
 #define INITNEGDONE	=-1
-#endif
+#endif	// DEBUGMAIN
 
 #ifndef CUDAKERNEL
 #if __linux__   //  or #if __GNUC__
     #if __x86_64__ || __ppc64__
         #define DEBUGENVIRONMENT64
-    #else
+    #else	// __x86_64__ || __ppc64__
         #define DEBUGENVIRONMENT32
-    #endif
-#else
+    #endif	// __x86_64__ || __ppc64__
+#else	// __linux__
     #if _WIN32
         #define DEBUGENVIRONMENT32
-    #else
+    #else	// _WIN32
         #define DEBUGENVIRONMENT64
-    #endif
+    #endif	// _WIN32
 #endif // __linux__
-#endif
+#endif	// CUDAKERNEL
 
 // functions
 EXTERN CCALLING int debug_init (void **debug_options_struct );
@@ -237,7 +243,7 @@ EXTERN FILE *fp9 INITNULL;
 
 #ifndef DEBUGMAIN
 EXTERN const char *debug_devices[DIMDEBUGDEVICES];
-#else
+#else  // DEBUGMAIN
 EXTERN const char *debug_devices[DIMDEBUGDEVICES] = {
 	"FILEOUTPUT", \
 	"SERIALPORT", \
@@ -321,7 +327,7 @@ EXTERN const char *debug_devices[DIMDEBUGDEVICES] = {
 // define debug option names (should set to same as index define name)
 #ifndef DEBUGMAIN
 EXTERN const char *debug_flag[NUMDEBUGFLAGS];
-#else
+#else	// DEBUGMAIN
 const char *debug_flag[NUMDEBUGFLAGS] = {
 	"none", \
 	"TRACE", \
@@ -384,7 +390,7 @@ const char *debug_flag[NUMDEBUGFLAGS] = {
 	"CUDASHA512ABORT", \
 	""};
 
-#endif
+#endif	// DEBUGMAIN
 // define the debug option status flags
 EXTERN unsigned char bdebug_flag_set[NUMDEBUGFLAGS] INITSZERO;
 

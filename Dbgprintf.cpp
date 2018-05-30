@@ -55,7 +55,7 @@ HANDLE hStderr;
 	if ( debugflag >= NOHEADspecial ) {
 		nTmp=sprintf(str,"%s",tmpstr);
 	} else {
-		nTmp=sprintf(str,DBGBOLDGREEN(line)" "DBGBOLDRED(%i)" "DBGBOLDGREEN(in)" "DBGBOLDRED(%s)": %s",linenum,modulename,tmpstr);
+		nTmp=sprintf(str,DBGBOLDGREEN(line) " " DBGBOLDRED(%i) " " DBGBOLDGREEN(in) " " DBGBOLDRED(%s) ": %s",linenum,modulename,tmpstr);
 	}
 	assert(nTmp<LENTEMPSTR);
 	switch (iDebugOutputDevice)

@@ -20,7 +20,11 @@
 #include "debug01.h"
 #define FROM_DEBUGLIB2
 #include "tutlib.h"
+#ifndef BSD
 #include <malloc.h>
+#else	// BSD
+#include <stdlib.h>
+#endif	// BSD
 
 DEBUGOPTIONSTYPE *dbgoptions;
 

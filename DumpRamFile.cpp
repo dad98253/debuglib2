@@ -38,7 +38,7 @@ void DumpRamFile(char **lpHeapFile)
 	}
 
 done:
-	free(*lpHeapFile);
+	free((void*)*lpHeapFile);
 	*lpHeapFile = NULL;
 
 	return;
