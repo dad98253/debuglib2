@@ -25,21 +25,20 @@ int set_debug_device (char * devicetype )
 {
 	int truesize;
 	int i;
-	int iretval;
 	if ( devicetype == NULL ) return (-1);
 	if ( ( truesize = strlen(devicetype) ) == 0 ) return (-2);
 	if ( ( truesize = strlen(devicetype) ) > 10 ) return (-3);
 	for ( i=0; i<DIMDEBUGDEVICES ; i++ ) {
 		if ( strcmp ( devicetype, debug_devices[i] ) == 0 ) {
 			iDebugOutputDevice = i;
-			if ( (iretval = OpenDebugDevice() ) ) {
+			if ( OpenDebugDevice() != 1 ) {
 				printf ("failed to open debug device\n");
-				return (iretval);
+				return (-4);
 			}
 			return(0);
 		}
 	}
-	return (-4);
+	return (-5);
 }
 
 

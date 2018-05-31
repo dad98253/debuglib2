@@ -31,13 +31,13 @@ int IPSend(char * Buffer, int MaxDataSize) {
 			fprintf(stderr,"send() failed: error %d\n",WSAGetLastError());
 			WSACleanup();
 #else
-		int errsv = errno;
-		if ( bMyWay ) {
-			fprintf(stderr,"send() failed: error %d, msg = %s\n",errsv,Buffer);
-			ibadcalls++;
-			if ( ibadcalls > IPSENDBADLIMIT ) bMyWay = FALSE;
-		}
-		else fprintf(stderr,"send() failed: error %d\n",errsv);
+			int errsv = errno;
+			if ( bMyWay ) {
+				fprintf(stderr,"send() failed: error %d (%s), msg = %s\n",errsv,strerror(errno),Buffer);
+				ibadcalls++;
+				if ( ibadcalls > IPSENDBADLIMIT ) bMyWay = FALSE;
+			}
+			else fprintf(stderr,"send() failed: error %d (%s)\n",errsv,strerror(errno));
 #endif
 			return -1;
 		}

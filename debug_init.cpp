@@ -28,7 +28,7 @@
 
 DEBUGOPTIONSTYPE *dbgoptions;
 
-int debug_init ( void **debug_options_struct)
+int debug_init ( void **debug_options_struct, int initialvirbositry)
 {
 	int truesize;
 	int retvalue = 0;
@@ -37,7 +37,9 @@ int debug_init ( void **debug_options_struct)
 		return (-1);
 	}
 	dbgoptions = (DEBUGOPTIONSTYPE *)debug_options_struct;
-	iDebugOutputDevice = 4;
+	iDebugOutputDevice = 6;	// added why??
+	debugInitialVirbosity = debugVirbosity = initialvirbositry;
+	bdebug_flag_set[TRACE] = 1;
 	debug_read_proc_file(0);
 //fprintf(stderr,"debugheapstart = %llx, debugheapend = %llx, debugstackstart = %llx, debugstackend = %llx\n",debugheapstart, debugheapend, debugstackstart, debugstackend);
 //exit(EXIT_FAILURE);

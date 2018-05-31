@@ -24,7 +24,7 @@ bool SaveStringInHeap(char **lpHeapFile,char *str)
 {
 	int istart;
 	int iend;
-	dfprintf(__LINE__,__FILE__,DEBUGSAVEINSTRING,"save \"%s\" *lpHeapFile=(0x%llx)\n",str,*lpHeapFile);
+//	dfprintf(__LINE__,__FILE__,DEBUGSAVEINSTRING,"save \"%s\" *lpHeapFile=(0x%llx)\n",str,*lpHeapFile);
 	istart = ReAllocateCharVector((unsigned char **)lpHeapFile, 0);
 	if ( istart == 1 ) {
 		**lpHeapFile = '\n';
@@ -37,7 +37,7 @@ bool SaveStringInHeap(char **lpHeapFile,char *str)
 			return (true);
 		}
 	}
-	dfprintf(__LINE__,__FILE__,DEBUGSAVEINSTRING,"save string at (0x%llx)+%i of length %i\n",*lpHeapFile,istart,(int)strlen(str));
+//	dfprintf(__LINE__,__FILE__,DEBUGSAVEINSTRING,"save string at (0x%llx)+%i of length %i\n",*lpHeapFile,istart,(int)strlen(str));
 	strcpy(*lpHeapFile+iStartOfHeapFile,str);
 	iend = iStartOfHeapFile + strlen(str);
 	*(*lpHeapFile+iend) = '\000';

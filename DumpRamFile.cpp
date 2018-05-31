@@ -33,7 +33,7 @@ void DumpRamFile(char **lpHeapFile)
 	while ( istart < iend )
 	{
 		if (strcmp( ((*lpHeapFile)+istart) , "$e$n$d$o$f$f$i$l$e$" ) == 0 ) goto done;
-		dfprintf(__LINE__,__FILE__,DEBUGDUMPRAMFILE, ((*lpHeapFile)+istart) );
+		ddfprintf( ((*lpHeapFile)+istart) );
 		istart+= ( strlen( (*lpHeapFile)+istart ) + 1 );
 	}
 

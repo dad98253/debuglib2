@@ -64,7 +64,7 @@
 #endif	// CUDAKERNEL
 
 // functions
-EXTERN CCALLING int debug_init (void **debug_options_struct );
+EXTERN CCALLING int debug_init ( void **debug_options_struct, int initialvirbositry);
 EXTERN CCALLING int set_debug_device (char * devicetype );
 EXTERN CCALLING void load_debug ();
 EXTERN CCALLING void debug_close ();
@@ -320,10 +320,12 @@ EXTERN const char *debug_devices[DIMDEBUGDEVICES] = {
 #define FMTSELFTESTDEBUGDMPFMT	56
 #define BMYWAYOVERRIDE		57
 #define CUDASHA512ABORT		58
+#define TRACEGETFULLPATHNAME	59
+#define DEBUGSETTINGSINPUT	60
 
 #ifdef DEBUG
 // define the size of the debug option arrays
-#define NUMDEBUGFLAGS	60
+#define NUMDEBUGFLAGS	62
 // define debug option names (should set to same as index define name)
 #ifndef DEBUGMAIN
 EXTERN const char *debug_flag[NUMDEBUGFLAGS];
@@ -388,6 +390,8 @@ const char *debug_flag[NUMDEBUGFLAGS] = {
 	"FMTSELFTESTDEBUGDMPFMT", \
 	"BMYWAYOVERRIDE", \
 	"CUDASHA512ABORT", \
+	"TRACEGETFULLPATHNAME", \
+	"DEBUGSETTINGSINPUT", \
 	""};
 
 #endif	// DEBUGMAIN

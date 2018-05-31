@@ -30,7 +30,7 @@ unsigned long numout;
 HANDLE hStderr;
 
     va_start(args, fmt);
-/*
+
 	if ( !bMyWay ) return -1;
 	if ( debugflag > NUMDEBUGFLAGS && ( debugflag < NOHEADspecial || debugflag > ( NOHEADspecial + NUMDEBUGFLAGS ) ) ) {
 		MsgBox("Dbgprintf at %i in %s failed, \"%u\" is not a valid debug flag number\n debug flag numbers must be less than %u",linenum,modulename,debugflag,NUMDEBUGFLAGS);
@@ -46,7 +46,7 @@ HANDLE hStderr;
 	if ( debugflag > NOHEADspecial ) if ( bdebug_flag_set[debugflag-NOHEADspecial] == 0 ) {
 		return(0);
 	}
-*/
+
 	if ( !debugCheckflags( debugflag ) ) return(0);
 	str[0]='\000';
 	tmpstr[0]='\000';

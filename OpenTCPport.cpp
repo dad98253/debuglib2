@@ -76,10 +76,10 @@ int OpenTCPport(void) {
 #ifdef DEBUGOPENTCPPORT
 		fprintf(stderr,"Client: Cannot resolve address [%s]: Error %d\n",
 			server_name,WSAGetLastError());
-#endif
+#endif	// DEBUGOPENTCPPORT
 		WSACleanup();
 		return 0;
-#else
+#else	// WINDOZE
 #ifdef DEBUGOPENTCPPORT
 		int errsv = errno;
 		int herrsv = h_errno;
@@ -87,9 +87,9 @@ int OpenTCPport(void) {
 			server_name,errsv,herrsv);
 		fprintf(stderr,"%s\n", hstrerror(h_errno));
 		if (h_errno == HOST_NOT_FOUND) fprintf(stderr,"Note: on linux, ip addresses must have valid RDNS entries\n");
-#endif
-#endif
-//		return 0;
+#endif	// DEBUGOPENTCPPORT
+#endif	// WINDOZE
+//		return 0;	////////////   ???? why is this commented out on linux??
 	}
 
 	//
@@ -133,9 +133,9 @@ int OpenTCPport(void) {
 
 
 	if ( hp != NULL ) {
-		dfprintf(__LINE__,__FILE__,DEBUGOPENTCPPORT,"Client connecting to: %s\n",hp->h_name); // warning: can cause a loop !
+//		dfprintf(__LINE__,__FILE__,DEBUGOPENTCPPORT,"Client connecting to: %s\n",hp->h_name); // warning: can cause a loop !
 	} else {
-		dfprintf(__LINE__,__FILE__,DEBUGOPENTCPPORT,"Client connecting to: %s\n",server_name); // warning: can cause a loop !
+//		dfprintf(__LINE__,__FILE__,DEBUGOPENTCPPORT,"Client connecting to: %s\n",server_name); // warning: can cause a loop !
 	}
 
 	if (connect(conn_socket,(struct sockaddr*)&server,sizeof(server))
