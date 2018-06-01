@@ -6,6 +6,9 @@
 #ifndef CUDAKERNEL
 #ifndef BSD
 #include <malloc.h>
+#ifdef WINDOZE
+#include <stdio.h>
+#endif	// WINDOZE
 #else	// BSD
 #include <stdlib.h>
 #define _WITH_GETLINE

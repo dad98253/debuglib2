@@ -58,6 +58,10 @@ int debug_init ( void **debug_options_struct, int initialvirbositry)
 //char tmpstr[LENTEMPSTR];
 	str=(char *)malloc(LENTEMPSTR);
 	tmpstr=(char *)malloc(LENTEMPSTR);
+#ifndef WINDOZE
 	bOutputDP = bIsStdinTty = isatty(STDIN_FILENO);
+#else	// WINDOZE
+	bOutputDP = bIsStdinTty = false;
+#endif	// WINDOZE
 	return(0);
 }

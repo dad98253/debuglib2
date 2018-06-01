@@ -16,6 +16,9 @@
 #endif
 
 
+#ifndef WINDOZE		// this routine does not apply to windows
+
+
 #include "debug.h"
 #include "debug01.h"
 #include <libunwind.h>
@@ -53,3 +56,5 @@ char * jtrunwind (int icall) {
   }
   return (ctemp);
 }
+
+#endif

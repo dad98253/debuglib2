@@ -21,7 +21,7 @@
 
 #ifndef WINDOZE
 #define _MSC_VER	0
-#endif
+#endif	// WINDOZE
 
 #if _MSC_VER > 1000
 #pragma once
@@ -29,6 +29,7 @@
 
 #ifdef WINDOZE
 // Windows Header Files:
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #define UNUSED(x) x
 #else	// WINDOZE
@@ -37,9 +38,9 @@
 #endif	// WINDOZE
 
 #ifdef WINDOZE
-#define WIN32_LEAN_AND_MEAN
+//#define WIN32_LEAN_AND_MEAN
 #include <winsock2.h>
-#else
+#else	// WINDOZE
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <arpa/inet.h>
@@ -51,7 +52,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <ctype.h>
-#endif
+#endif	// WINDOZE
 
 #ifndef bool
     #define bool int
@@ -113,8 +114,10 @@ EXTERN int iStartOfHeapFile;
 EXTERN FILE *hpfile;
 EXTERN HANDLE hConsoleBuffer;
 EXTERN CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
+#ifndef WINDOZE
 EXTERN pid_t mypid;
 EXTERN pid_t myppid;
+#endif	// WINDOZE
 
 #if ARCH_INT_GT_32
 typedef unsigned short ARCH_WORD_32;

@@ -15,6 +15,7 @@
 #pragma comment( user, "File: " __FILE__ ". Compiled on " __DATE__ " at " __TIME__ ".  Last modified on " __TIMESTAMP__ )
 #endif
 
+#ifndef WINDOZE		// this routine does not apply to windows
 
 #include "debug.h"
 #include "debug01.h"
@@ -47,3 +48,5 @@ char * debugpointer2str ( void *x )
 	return (iswildl);	// pointer above end of heap and below start of stack (bad boy)
 
 }
+
+#endif	// WINDOZE
