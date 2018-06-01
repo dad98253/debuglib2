@@ -69,7 +69,12 @@
 #define SOCKET_ERROR	-1
 #endif
 
+#ifndef MIN
 #define MIN(x, y) (((x) > (y)) ? (y) : (x))
+#endif	// MIN
+#ifndef MAX
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#endif	// MAX
 
 EXTERN struct sockaddr_in server;
 EXTERN struct hostent *hp;
