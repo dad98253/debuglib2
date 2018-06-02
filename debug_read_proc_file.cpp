@@ -116,4 +116,12 @@ int debug_read_proc_file(int idumpem)
 	return 0;
 }
 
+
+#else	// WINDOZE
+
+int debug_read_proc_file(int idumpem) 
+{
+	return 0;
+}
+
 #endif	// WINDOZE
