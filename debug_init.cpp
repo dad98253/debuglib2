@@ -26,6 +26,8 @@
 #include <stdlib.h>
 #endif	// BSD
 
+extern int tutIsTty();
+
 DEBUGOPTIONSTYPE *dbgoptions;
 
 int debug_init ( void **debug_options_struct, int initialvirbositry)
@@ -58,10 +60,9 @@ int debug_init ( void **debug_options_struct, int initialvirbositry)
 //char tmpstr[LENTEMPSTR];
 	str=(char *)malloc(LENTEMPSTR);
 	tmpstr=(char *)malloc(LENTEMPSTR);
-#ifndef WINDOZE
-	bOutputDP = bIsStdinTty = isatty(STDIN_FILENO);
-#else	// WINDOZE
-	bOutputDP = bIsStdinTty = false;
-#endif	// WINDOZE
+
+	// check if stdin is tty...
+	tutIsTty();
+
 	return(0);
 }
