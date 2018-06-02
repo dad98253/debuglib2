@@ -15,7 +15,10 @@
 #pragma comment( user, "File: " __FILE__ ". Compiled on " __DATE__ " at " __TIME__ ".  Last modified on " __TIMESTAMP__ )
 #endif
 
-
+#ifdef WINDOZE
+#define WIN32_LEAN_AND_MEAN
+#include <winsock2.h>
+#endif	// WINDOZE
 #include "debug.h"
 #include "debug01.h"
 #include <string.h>

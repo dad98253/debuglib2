@@ -38,6 +38,7 @@
 #endif	// WINDOZE
 
 #ifdef WINDOZE
+#include <stdio.h>
 //#define WIN32_LEAN_AND_MEAN
 #include <winsock2.h>
 #else	// WINDOZE
