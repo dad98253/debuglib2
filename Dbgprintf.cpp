@@ -57,13 +57,19 @@ HANDLE hStderr;
 		nTmp=sprintf(str,"%s",tmpstr);
 	} else {
 		char * strmodulename = NULL;
+		char * dotloc = NULL;
+		char shortname[16];
 #ifdef WINDOZE
 		strmodulename = strrchr ( modulename , '\\' )+1;
 #else	// WINDOZE
 		strmodulename = strrchr ( modulename , '/' )+1;
 #endif	// WINDOZE
 		if ( strmodulename == NULL ) strmodulename = (char *)modulename; 
-		nTmp=sprintf(str,DBGBOLDGREEN(line) " " DBGBOLDRED(%i) " " DBGBOLDGREEN(in) " " DBGBOLDRED(%s) ": %s",linenum,strmodulename,tmpstr);
+		dotloc = strrchr ( strmodulename , '.' );
+		if ( dotloc == NULL ) dotloc = strmodulename + MIN(strlen(strmodulename),15);
+		strncpy(shortname,(const char *)strmodulename,(size_t)(dotloc-strmodulename));
+		shortname[(dotloc-strmodulename)]='\000';
+		nTmp=sprintf(str,DBGBOLDGREEN(@) DBGBOLDRED(%i) DBGBOLDGREEN(>) DBGBOLDRED(%s) ": %s",linenum,shortname,tmpstr);
 	}
 	assert(nTmp<LENTEMPSTR);
 	switch (iDebugOutputDevice)
