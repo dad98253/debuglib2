@@ -60,9 +60,9 @@ HANDLE hStderr;
 		char * dotloc = NULL;
 		char shortname[16];
 #ifdef WINDOZE
-		strmodulename = strrchr ( modulename , '\\' )+1;
+		strmodulename = strrchr ( (char *)modulename , '\\' )+1;
 #else	// WINDOZE
-		strmodulename = strrchr ( modulename , '/' )+1;
+		strmodulename = strrchr ( (char *)modulename , '/' )+1;
 #endif	// WINDOZE
 		if ( strmodulename == NULL ) strmodulename = (char *)modulename; 
 		dotloc = strrchr ( strmodulename , '.' );
