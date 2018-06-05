@@ -9,6 +9,7 @@
 #ifdef WINDOZE
 #include <stdio.h>
 #endif	// WINDOZE
+#include <stdio.h>
 #else	// BSD
 #include <stdlib.h>
 #define _WITH_GETLINE
