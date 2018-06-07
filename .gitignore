@@ -24,3 +24,4 @@ subdir.mk
 vc60.*
 *.res
 /debug.cpp.old
+/DebugTurk/
