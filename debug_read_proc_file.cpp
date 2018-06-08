@@ -82,8 +82,7 @@ int debug_read_proc_file(int idumpem)
 			fclose(procfile);
 			exit(EXIT_FAILURE);
 		}
-		free(line);
-		line = NULL;
+
 #ifndef BSD
 		if (strcmp(maploc,"[heap]") == 0 ) {
 			debugheapstart = startadd;
@@ -111,6 +110,7 @@ int debug_read_proc_file(int idumpem)
 		}
 #endif	// BSD
 	}
+	free(line);
 	fclose(procfile);
 
 	return 0;
