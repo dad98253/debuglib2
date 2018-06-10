@@ -21,10 +21,13 @@
 
 #include "debug.h"
 #include "debug01.h"
+#define UNW_LOCAL_ONLY
 #include <libunwind.h>
 #include <string.h>
 
+extern int locateLineNum ( long long unsigned int lluRelAddress , char * szFunctionName , char * szExeFile );
 
+char * szMainExeFile = NULL;
 
 char * jtrunwind (int icall) {
   unw_cursor_t cursor; unw_context_t uc;
@@ -57,4 +60,47 @@ char * jtrunwind (int icall) {
   return (ctemp);
 }
 
-#endif
+#ifndef NODWARFLIB
+
+char * jtrunwindln (int icall) {
+  unw_cursor_t cursor; unw_context_t uc;
+  unw_word_t ip, sp;
+#define JTRUNWINDSIZE	100
+  static char ctemp[JTRUNWINDSIZE];
+  int j = 0;
+  ctemp[0] = '\000';
+  int linenumber = 0;
+
+  unw_getcontext(&uc);
+  unw_init_local(&cursor, &uc);
+  while (unw_step(&cursor) > 0) {
+    unw_word_t  offset;
+    char        fname[64];
+    unw_get_reg(&cursor, UNW_REG_IP, &ip);
+    unw_get_reg(&cursor, UNW_REG_SP, &sp);
+    fname[0] = '\0';
+    unw_get_proc_name(&cursor, fname, sizeof(fname), &offset);
+    if (icall < 0 ) {
+    	dfprintf (__LINE__,__FILE__,TRACE,"ip = %lx, sp = %lx (%s+0x%lx)\n", (long) ip, (long) sp, fname, offset);
+    	dfprintf (__LINE__,__FILE__,TRACE,"szMainExeFile = %s\n", szMainExeFile);
+    	dfprintf (__LINE__,__FILE__,TRACE,"line number = %i\n", locateLineNum ( offset ,  (char *)fname ,  szMainExeFile ));
+    }
+    if (icall ==  j) {
+		if ( strlen( fname ) < (JTRUNWINDSIZE-23) ) {
+//			strcpy ( ctemp , fname );
+			;
+			if ( (linenumber = locateLineNum ( offset ,  (char *)fname ,  szMainExeFile)) ) {
+				snprintf ( ctemp ,JTRUNWINDSIZE-1, "%s, line %i",fname,linenumber);
+			} else {
+				snprintf ( ctemp ,JTRUNWINDSIZE-1, "%s, line ?",fname);
+			}
+		}
+    }
+    j++;
+  }
+  return (ctemp);
+}
+
+#endif	// NODWARFLIB
+
+#endif	// WINDOZE
