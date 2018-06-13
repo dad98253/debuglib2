@@ -333,11 +333,10 @@ EXTERN const char *debug_devices[DIMDEBUGDEVICES] = {
 #define TRACEDWARFDIE	65
 #define TRACEUNWIND	66
 #define TRACEUNWINDLN	67
-#define XXXDUMMYXXX		68
 
 #ifdef DEBUG
 // define the size of the debug option arrays
-#define NUMDEBUGFLAGS	70
+#define NUMDEBUGFLAGS	69
 // define debug option names (should set to same as index define name)
 #ifndef DEBUGMAIN
 EXTERN const char *debug_flag[NUMDEBUGFLAGS];
@@ -411,7 +410,6 @@ const char *debug_flag[NUMDEBUGFLAGS] = {
 	"TRACEDWARFDIE", \
 	"TRACEUNWIND", \
 	"TRACEUNWINDLN", \
-	"XXXDUMMYXXX", \
 	""};
 
 #endif	// DEBUGMAIN
