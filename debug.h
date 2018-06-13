@@ -326,10 +326,15 @@ EXTERN const char *debug_devices[DIMDEBUGDEVICES] = {
 #define CUDASHA512ABORT		58
 #define TRACEGETFULLPATHNAME	59
 #define DEBUGSETTINGSINPUT	60
+#define TRACEDWARF	61
+#define TRACEDWARF2	62
+#define TRACEDWARFSUB	63
+#define TRACEDWARFDIR	64
+#define TRACEDWARFDIE	65
 
 #ifdef DEBUG
 // define the size of the debug option arrays
-#define NUMDEBUGFLAGS	62
+#define NUMDEBUGFLAGS	67
 // define debug option names (should set to same as index define name)
 #ifndef DEBUGMAIN
 EXTERN const char *debug_flag[NUMDEBUGFLAGS];
@@ -396,6 +401,11 @@ const char *debug_flag[NUMDEBUGFLAGS] = {
 	"CUDASHA512ABORT", \
 	"TRACEGETFULLPATHNAME", \
 	"DEBUGSETTINGSINPUT", \
+	"TRACEDWARF", \
+	"TRACEDWARF2", \
+	"TRACEDWARFSUB", \
+	"TRACEDWARFDIR", \
+	"TRACEDWARFDIE", \
 	""};
 
 #endif	// DEBUGMAIN
