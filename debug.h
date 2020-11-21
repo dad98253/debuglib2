@@ -177,10 +177,10 @@ EXTERN CCALLING unsigned char debugSetDBLevel( int DesiredLevel );
 // unconditional dump db...list structure to debug device
 #define debugdmplist_main(a,b,c) if ( DBGLVLTEST > NONE ) debugdmplist_main_f(__LINE__,__FILE__,99999,a,b,c)
 
-// define dfprintf command (conditional formatted print to debug device with line number)
-#define dfprintf if ( DBGLVLTEST > NONE ) Dbgprintf
+// define dfprintf2 command (conditional formatted print to debug device with line number)
+#define dfprintf2 if ( DBGLVLTEST > NONE ) Dbgprintf
 
-// define ddfprintf command (formatted print to debug device)
+// define ddfprintf2 command (formatted print to debug device)
 #define ddfprintf if ( DBGLVLTEST > NONE ) Dbgdmpprintf
 
 // define dcfprintf command (conditional formatted print to debug device)
@@ -477,8 +477,8 @@ EXTERN unsigned char bdebug_flag_set[NUMDEBUGFLAGS] INITSZERO;
 // create dummy debug_dump_stuff_noeol command for non-debug compiles
 #define debugdmplist_main if (0) ((int (*)(const char *, ...)) 0)
 
-// create dummy dfprintf command for non-debug compiles
-#define dfprintf if (0) ((int (*)(int, ...)) 0)
+// create dummy dfprintf2 command for non-debug compiles
+#define dfprintf2 if (0) ((int (*)(int, ...)) 0)
 
 // create dummy ddfprintf command for non-debug compiles
 #define ddfprintf if (0) ((int (*)(const char *, ...)) 0)

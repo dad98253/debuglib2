@@ -30,5 +30,5 @@ void debug_dump_stuff_f(unsigned int line, const char * file, unsigned int debug
 	if ( !debugCheckflags( debugflag ) ) return;
 
 	debug_dump_stuff_noeol_f(line,file,dbflg,x,size);
-	dfprintf(line,file,dbflg,"\n");
+	dfprintf2(line,file,dbflg,"\n");
 }

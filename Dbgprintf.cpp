@@ -152,7 +152,7 @@ HANDLE hStderr;
 
 	  case RAM:
 		SaveStringInHeap(&lpHeapFile,str);
-		dfprintf(__LINE__,__FILE__,DEBUGDBGPRINTF,"%s",str);
+		dfprintf2(__LINE__,__FILE__,DEBUGDBGPRINTF,"%s",str);
 
 		break;
 	}

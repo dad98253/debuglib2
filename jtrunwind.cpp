@@ -47,7 +47,7 @@ char * jtrunwind (int icall) {
     fname[0] = '\0';
     unw_get_proc_name(&cursor, fname, sizeof(fname), &offset);
     if (icall < 0 ) {
-	dfprintf (__LINE__,__FILE__,TRACEUNWIND,"ip = %lx, sp = %lx (%s+0x%lx)\n", (long) ip, (long) sp, fname, offset);
+	dfprintf2 (__LINE__,__FILE__,TRACEUNWIND,"ip = %lx, sp = %lx (%s+0x%lx)\n", (long) ip, (long) sp, fname, offset);
     }
     if (icall ==  j) {
 	if ( strlen( fname ) < (JTRUNWINDSIZE-23) ) {
@@ -81,9 +81,9 @@ char * jtrunwindln (int icall) {
     fname[0] = '\0';
     unw_get_proc_name(&cursor, fname, sizeof(fname), &offset);
     if (icall < 0 ) {
-    	dfprintf (__LINE__,__FILE__,TRACEUNWINDLN,"ip = %lx, sp = %lx (%s+0x%lx)\n", (long) ip, (long) sp, fname, offset);
-    	dfprintf (__LINE__,__FILE__,TRACEUNWINDLN,"szMainExeFile = %s\n", szMainExeFile);
-    	dfprintf (__LINE__,__FILE__,TRACEUNWINDLN,"line number = %i\n", locateLineNum ( offset ,  (char *)fname ,  szMainExeFile ));
+    	dfprintf2 (__LINE__,__FILE__,TRACEUNWINDLN,"ip = %lx, sp = %lx (%s+0x%lx)\n", (long) ip, (long) sp, fname, offset);
+    	dfprintf2 (__LINE__,__FILE__,TRACEUNWINDLN,"szMainExeFile = %s\n", szMainExeFile);
+    	dfprintf2 (__LINE__,__FILE__,TRACEUNWINDLN,"line number = %i\n", locateLineNum ( offset ,  (char *)fname ,  szMainExeFile ));
     }
     if (icall ==  j) {
 		if ( strlen( fname ) < (JTRUNWINDSIZE-23) ) {

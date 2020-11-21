@@ -27,26 +27,26 @@ void debug_dump_fmt( void *x, unsigned int size)
 	if ( debugpointertest(x) ) {
 		for(i=0;i<size;i++)
 		{
-//dfprintf(__LINE__,__FILE__,TRACE,"i = %i, NOHEADspecial = %i, print char at %p:\n",i , NOHEADspecial, ((unsigned char*)x)[i]);
-			dfprintf(__LINE__,__FILE__,NOHEADspecial,"%02x", ((unsigned char*)x)[i]);
+//dfprintf2(__LINE__,__FILE__,TRACE,"i = %i, NOHEADspecial = %i, print char at %p:\n",i , NOHEADspecial, ((unsigned char*)x)[i]);
+			dfprintf2(__LINE__,__FILE__,NOHEADspecial,"%02x", ((unsigned char*)x)[i]);
 			if( (i%4)==3 ) {
-				dfprintf(__LINE__,__FILE__,NOHEADspecial," ");
+				dfprintf2(__LINE__,__FILE__,NOHEADspecial," ");
 			}
 		}
-		dfprintf(__LINE__,__FILE__,NOHEADspecial," ___ ");
+		dfprintf2(__LINE__,__FILE__,NOHEADspecial," ___ ");
 		for(i=0;i<size;i++)
 		{
 			if ( isprint(((unsigned char*)x)[i]) ) {
-				dfprintf(__LINE__,__FILE__,NOHEADspecial,"%c", ((unsigned char*)x)[i]);
+				dfprintf2(__LINE__,__FILE__,NOHEADspecial,"%c", ((unsigned char*)x)[i]);
 			} else {
-				dfprintf(__LINE__,__FILE__,NOHEADspecial,".");
+				dfprintf2(__LINE__,__FILE__,NOHEADspecial,".");
 			}
 			if( (i%4)==3 ) {
-				dfprintf(__LINE__,__FILE__,NOHEADspecial," ");
+				dfprintf2(__LINE__,__FILE__,NOHEADspecial," ");
 			}
 		}
 	} else {
-		dfprintf(__LINE__,__FILE__,TRACE,"debug_dump_fmt: bad call, argument pointer is %s\n", debugpointer2str(x));
+		dfprintf2(__LINE__,__FILE__,TRACE,"debug_dump_fmt: bad call, argument pointer is %s\n", debugpointer2str(x));
 	}
 
 	return;

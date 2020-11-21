@@ -26,50 +26,50 @@
 
 void DumpSymbols(char * where) {
 
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"DumpSymbols called from %s\n",where);
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"DumpSymbols called from %s\n",where);
 
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m DEBUG\33[0m set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m DEBUG\33[0m set\n");
 
 #ifdef WINDOZE
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m WINDOZE\33[0m set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m WINDOZE\33[0m set\n");
 #else
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m WINDOZE\33[0m not set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m WINDOZE\33[0m not set\n");
 #endif
 
 #ifdef GENRESFILE
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m GENRESFILE\33[0m set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m GENRESFILE\33[0m set\n");
 #else
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m GENRESFILE\33[0m not set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m GENRESFILE\33[0m not set\n");
 #endif
 
 #ifdef TEXTMODEONLY
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m TEXTMODEONLY\33[0m set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m TEXTMODEONLY\33[0m set\n");
 #else
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m TEXTMODEONLY\33[0m not set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m TEXTMODEONLY\33[0m not set\n");
 #endif
 
 #ifdef DEBUGWCSTOMBS
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m DEBUGWCSTOMBS\33[0m set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m DEBUGWCSTOMBS\33[0m set\n");
 #else
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m DEBUGWCSTOMBS\33[0m not set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m DEBUGWCSTOMBS\33[0m not set\n");
 #endif
 
 #ifdef TESTTUTX2
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m TESTTUTX2\33[0m set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m TESTTUTX2\33[0m set\n");
 #else
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m TESTTUTX2\33[0m not set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m TESTTUTX2\33[0m not set\n");
 #endif
 
 #ifdef GENMEMFILE
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m GENMEMFILE\33[0m set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m GENMEMFILE\33[0m set\n");
 #else
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m GENMEMFILE\33[0m not set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m GENMEMFILE\33[0m not set\n");
 #endif
 
 #ifdef DOMYTUTIO
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m DOMYTUTIO\33[0m set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m DOMYTUTIO\33[0m set\n");
 #else
-	dfprintf(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m DOMYTUTIO\33[0m not set\n");
+	dfprintf2(__LINE__,__FILE__,NOHEADspecial,"\33[1;31m DOMYTUTIO\33[0m not set\n");
 #endif
 
 	return;

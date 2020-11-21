@@ -25,7 +25,7 @@ int debugpointertest ( void *x )
 	intptr_t uP1;
 
 	uP1 = (intptr_t)x;
-//	dfprintf(__LINE__,__FILE__,TRACE,"debugpointertest called from %s: x -> 0x%016lx\n",jtrunwind(1),uP1);
+//	dfprintf2(__LINE__,__FILE__,TRACE,"debugpointertest called from %s: x -> 0x%016lx\n",jtrunwind(1),uP1);
 	if ( uP1 == 0 ) return (0);	// -nil- pointer (bad boy)
 	debug_read_proc_file(0);	// get current heap and stack limits
 	if (  uP1 < (intptr_t)debugheapend ) return(-1);	// pointer less than end of heap (good boy)

@@ -69,7 +69,7 @@ int debug_read_proc_file(int idumpem)
 	while ( (linelen = getline(&line, &maxlen, procfile)) > 0 ) {
 		numread=strlen(line);
 		if(numread>0) line[numread-1]='\000';
-		if ( idumpem ) dfprintf(__LINE__,__FILE__,NOHEADspecial," %s\n", line);
+		if ( idumpem ) dfprintf2(__LINE__,__FILE__,NOHEADspecial," %s\n", line);
 #ifndef BSD
 		numread = sscanf ( line, "%llx-%llx %s %x %x:%x %u %s", &startadd,&endadd,mode,&startoffset,&devmaj,&devmin,&inode,maploc);
 		if ( numread != 7 && numread != 8 ) {

@@ -33,14 +33,14 @@ void debug_dump_stuff_msg_f(unsigned int line, const char * file, unsigned int d
 
 	if ( !debugCheckflags( debugflag ) ) return;
 
-	dfprintf(__LINE__,__FILE__,DEBUGDMPSTUFF,"debug_dump_stuff_msg_f: line = %i, file = %s, debugflag = %u, msg = %s, dbflg = %u, dbflg2 = %u\n",
+	dfprintf2(__LINE__,__FILE__,DEBUGDMPSTUFF,"debug_dump_stuff_msg_f: line = %i, file = %s, debugflag = %u, msg = %s, dbflg = %u, dbflg2 = %u\n",
 									line, file, debugflag, msg, dbflg , dbflg2 );
 
 	if ( x ) {
-		dfprintf(line,file,dbflg2,"%s[0-%i] starting at address %p: \n",(char *)msg ,size ,x );
+		dfprintf2(line,file,dbflg2,"%s[0-%i] starting at address %p: \n",(char *)msg ,size ,x );
 		debug_dump_stuff_f(line,file,dbflg,x , size);
 	} else {
-		dfprintf(line,file,dbflg2,"%s points to -nil-, dump of %s[0-%i] not possible!\n", (char *)msg, (char *)msg, size);
+		dfprintf2(line,file,dbflg2,"%s points to -nil-, dump of %s[0-%i] not possible!\n", (char *)msg, (char *)msg, size);
 	}
 
 	return;
