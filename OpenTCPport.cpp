@@ -55,9 +55,15 @@ int OpenTCPport(void) {
 	} else {
 		server_name = lpDebugServerName;
 	}
-#ifdef DEBUGOPENTCPPORT
-	fprintf(stderr,"opening server %s for port %i\n",server_name,iDebugServerPort);
-#endif	// DEBUGOPENTCPPORT
+
+	if ( debugCheckflags( DEBUGOPENTCPPORT ) ) {
+		if ( iDebugServerPort != 0 ) {
+			fprintf(stderr,"opening server %s for port %i\n",server_name,iDebugServerPort);
+		} else {
+			fprintf(stderr,"opening server %s for port %i\n",server_name,port);
+		}
+	}
+
 #ifdef WINDOZE
 	if (WSAStartup(0x202,&wsaData) == SOCKET_ERROR) {
 		fprintf(stderr,"WSAStartup failed with error %d\n",WSAGetLastError());
@@ -77,21 +83,21 @@ int OpenTCPport(void) {
 	}
 	if (hp == NULL ) {
 #ifdef WINDOZE
-#ifdef DEBUGOPENTCPPORT
-		fprintf(stderr,"Client: Cannot resolve address [%s]: Error %d\n",
+
+		if ( debugCheckflags( DEBUGOPENTCPPORT ) ) fprintf(stderr,"Client: Cannot resolve address [%s]: Error %d\n",
 			server_name,WSAGetLastError());
-#endif	// DEBUGOPENTCPPORT
 		WSACleanup();
 		return 0;
 #else	// WINDOZE
-#ifdef DEBUGOPENTCPPORT
-		int errsv = errno;
-		int herrsv = h_errno;
-		fprintf(stderr,"Client: Cannot resolve address [%s]: Error %d, h_err = %i\n",
-			server_name,errsv,herrsv);
-		fprintf(stderr,"%s\n", hstrerror(h_errno));
-		if (h_errno == HOST_NOT_FOUND) fprintf(stderr,"Note: on linux, ip addresses must have valid RDNS entries\n");
-#endif	// DEBUGOPENTCPPORT
+		if ( debugCheckflags( DEBUGOPENTCPPORT ) ) {
+			int errsv = errno;
+			int herrsv = h_errno;
+			fprintf(stderr,"Client: Cannot resolve address [%s]: Error %d, h_err = %i\n",
+				server_name,errsv,herrsv);
+			fprintf(stderr,"%s\n", hstrerror(h_errno));
+			if (h_errno == HOST_NOT_FOUND) fprintf(stderr,"Note: on linux, ip addresses must have valid RDNS entries\n");
+		}
+
 #endif	// WINDOZE
 //		return 0;	////////////   ???? why is this commented out on linux??
 	}
@@ -135,13 +141,13 @@ int OpenTCPport(void) {
 	//    This enables us to use send() and recv() on datagram sockets,
 	//    instead of recvfrom() and sendto()
 
-#ifdef DEBUGOPENTCPPORT
-	if ( hp != NULL ) {
-		fprintf(stderr,"Client connecting to: %s\n",hp->h_name);
-	} else {
-		fprintf(stderr,"Client connecting to: %s\n",server_name);
+	if ( debugCheckflags( DEBUGOPENTCPPORT ) ) {
+		if ( hp != NULL ) {
+			fprintf(stderr,"Client connecting to: %s\n",hp->h_name);
+		} else {
+			fprintf(stderr,"Client connecting to: %s\n",server_name);
+		}
 	}
-#endif
 	if (connect(conn_socket,(struct sockaddr*)&server,sizeof(server))
 		== SOCKET_ERROR) {
 #ifdef WINDOZE
