@@ -21,8 +21,9 @@
 #include <string.h>
 
 /*
- * I did some work like this, through much reading of MSDN and the sockets documentation I got a list of differences between Winsocks and POSIX sockets, many are minor, sign differences or type differences.
-
+ * I did some work like this, through much reading of MSDN and the sockets documentation I got a
+ * list of differences between Winsocks and POSIX sockets, many are minor, sign differences or type differences.
+ *
 
 uses closesocket() to close a socket, instead of close().
 uses an int for the third parameter in bind().
