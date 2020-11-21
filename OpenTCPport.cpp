@@ -20,6 +20,7 @@
 #include "debug01.h"
 #include <string.h>
 
+
 /*
  * I did some work like this, through much reading of MSDN and the sockets documentation I got a list of differences between Winsocks and POSIX sockets, many are minor, sign differences or type differences.
 
@@ -53,7 +54,9 @@ int OpenTCPport(void) {
 	} else {
 		server_name = lpDebugServerName;
 	}
-//fprintf(stderr,"opening server %s for port %i\n",server_name,iDebugServerPort);
+#ifdef DEBUGOPENTCPPORT
+	fprintf(stderr,"opening server %s for port %i\n",server_name,iDebugServerPort);
+#endif	// DEBUGOPENTCPPORT
 #ifdef WINDOZE
 	if (WSAStartup(0x202,&wsaData) == SOCKET_ERROR) {
 		fprintf(stderr,"WSAStartup failed with error %d\n",WSAGetLastError());
@@ -131,13 +134,13 @@ int OpenTCPport(void) {
 	//    This enables us to use send() and recv() on datagram sockets,
 	//    instead of recvfrom() and sendto()
 
-
+#ifdef DEBUGOPENTCPPORT
 	if ( hp != NULL ) {
-//		dfprintf(__LINE__,__FILE__,DEBUGOPENTCPPORT,"Client connecting to: %s\n",hp->h_name); // warning: can cause a loop !
+		fprintf(stderr,"Client connecting to: %s\n",hp->h_name);
 	} else {
-//		dfprintf(__LINE__,__FILE__,DEBUGOPENTCPPORT,"Client connecting to: %s\n",server_name); // warning: can cause a loop !
+		fprintf(stderr,"Client connecting to: %s\n",server_name);
 	}
-
+#endif
 	if (connect(conn_socket,(struct sockaddr*)&server,sizeof(server))
 		== SOCKET_ERROR) {
 #ifdef WINDOZE
