@@ -1,7 +1,7 @@
 #ifndef _DEBUG_H
 #define _DEBUG_H
 
-#ifdef DEBUG
+
 
 #ifndef CUDAKERNEL
 #ifndef BSD
@@ -113,6 +113,16 @@ EXTERN CCALLING char * debugpointer2str ( void *x );
 EXTERN CCALLING int debugpointertest ( void *x );
 EXTERN CCALLING unsigned char debugSetDBLevel( int DesiredLevel );
 
+#define DIMDEBUGDEVICES		7
+#define FILEOUTPUT 0
+#define SERIALPORT 1
+#define CONSOLE    2
+#define TCPPORT    3
+#define BITBUCKET  4
+#define DEBUGWIN   5
+#define RAM        6
+
+#ifdef DEBUG
 
 // macros
 #define debugstf(x) ( (x) ? (sDebugTrueFalse[1]) : (sDebugTrueFalse[0]) )
@@ -235,15 +245,6 @@ EXTERN CCALLING char *sDebugTrueFalse[2];
 EXTERN int ColorDebug INITIZERO;
 
 EXTERN FILE *fp9 INITNULL;
-
-#define DIMDEBUGDEVICES		7
-#define FILEOUTPUT 0
-#define SERIALPORT 1
-#define CONSOLE    2
-#define TCPPORT    3
-#define BITBUCKET  4
-#define DEBUGWIN   5
-#define RAM        6
 
 #ifndef DEBUGMAIN
 EXTERN const char *debug_devices[DIMDEBUGDEVICES];

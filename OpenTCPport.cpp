@@ -9,8 +9,6 @@
 #pragma message( "Compiling " __FILE__ " on " __DATE__ " at " __TIME__ )
 #pragma message( "File last modified on " __TIMESTAMP__ )
 #pragma message( "  ")
-#pragma title( "debuglib version 2.0" )
-#pragma subtitle( "Copyright (c) 2018, Nehemiah Ministries, Inc." )
 #pragma comment( compiler )
 #pragma comment( user, "File: " __FILE__ ". Compiled on " __DATE__ " at " __TIME__ ".  Last modified on " __TIMESTAMP__ )
 #endif
@@ -49,13 +47,13 @@ Not mentioned, select() on Linux modifies the timeout value to reflect time not 
 
 
 int OpenTCPport(void) {
+#ifdef DEBUG
 	char *default_server_name = (char*)"localhost";
 	if ( lpDebugServerName == NULL ) {
 		server_name = default_server_name;
 	} else {
 		server_name = lpDebugServerName;
 	}
-#ifdef DEBUG
 	if ( debugCheckflags( DEBUGOPENTCPPORT ) ) {
 		if ( iDebugServerPort != 0 ) {
 			fprintf(stderr,"opening server %s for port %i\n",server_name,iDebugServerPort);
@@ -63,7 +61,6 @@ int OpenTCPport(void) {
 			fprintf(stderr,"opening server %s for port %i\n",server_name,port);
 		}
 	}
-#endif	// DEBUG
 #ifdef WINDOZE
 	if (WSAStartup(0x202,&wsaData) == SOCKET_ERROR) {
 		fprintf(stderr,"WSAStartup failed with error %d\n",WSAGetLastError());
@@ -83,14 +80,11 @@ int OpenTCPport(void) {
 	}
 	if (hp == NULL ) {
 #ifdef WINDOZE
-#ifdef DEBUG
 		if ( debugCheckflags( DEBUGOPENTCPPORT ) ) fprintf(stderr,"Client: Cannot resolve address [%s]: Error %d\n",
 			server_name,WSAGetLastError());
-#endif	// DEBUG
 		WSACleanup();
 		return 0;
 #else	// WINDOZE
-#ifdef DEBUG
 		if ( debugCheckflags( DEBUGOPENTCPPORT ) ) {
 			int errsv = errno;
 			int herrsv = h_errno;
@@ -99,7 +93,6 @@ int OpenTCPport(void) {
 			fprintf(stderr,"%s\n", hstrerror(h_errno));
 			if (h_errno == HOST_NOT_FOUND) fprintf(stderr,"Note: on linux, ip addresses must have valid RDNS entries\n");
 		}
-#endif	// DEBUG
 #endif	// WINDOZE
 //		return 0;	////////////   ???? why is this commented out on linux??
 	}
@@ -142,7 +135,6 @@ int OpenTCPport(void) {
 	//    ( LocalIPAddress, LocalPort, RemoteIP, RemotePort) mapping.
 	//    This enables us to use send() and recv() on datagram sockets,
 	//    instead of recvfrom() and sendto()
-#ifdef DEBUG
 	if ( debugCheckflags( DEBUGOPENTCPPORT ) ) {
 		if ( hp != NULL ) {
 			fprintf(stderr,"Client connecting to: %s\n",hp->h_name);
@@ -150,7 +142,6 @@ int OpenTCPport(void) {
 			fprintf(stderr,"Client connecting to: %s\n",server_name);
 		}
 	}
-#endif	// DEBUG
 	if (connect(conn_socket,(struct sockaddr*)&server,sizeof(server))
 		== SOCKET_ERROR) {
 #ifdef WINDOZE
@@ -162,6 +153,6 @@ int OpenTCPport(void) {
 #endif
 		return 0;
 	}
-
+#endif	// DEBUG
 	return 1;
 }

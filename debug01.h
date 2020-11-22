@@ -210,7 +210,9 @@ bool StripCSI(char *ci, char *co);
 int MsgBox(const char * message, ...);
 int ErrorMessageTX(LPSTR msg, unsigned int mode);
 int MessageBoxTX(const char * msg, const char * lpszBanner, unsigned int mode);
+#ifdef DEBUG
 size_t _msize(void *memblock);
+#endif	// DEBUG
 int tutPrintString (const char * szText);
 void NewLine(void); 
 void ScrollScreenBuffer(HANDLE, INT); 

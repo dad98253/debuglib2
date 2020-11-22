@@ -9,8 +9,6 @@
 #pragma message( "Compiling " __FILE__ " on " __DATE__ " at " __TIME__ )
 #pragma message( "File last modified on " __TIMESTAMP__ )
 #pragma message( "  ")
-#pragma title( "debuglib version 2.0" )
-#pragma subtitle( "Copyright (c) 2018, Nehemiah Ministries, Inc." )
 #pragma comment( compiler )
 #pragma comment( user, "File: " __FILE__ ". Compiled on " __DATE__ " at " __TIME__ ".  Last modified on " __TIMESTAMP__ )
 #endif
@@ -26,7 +24,9 @@ int Dbgprintf(int linenum, const char * modulename, unsigned int debugflag, cons
 {
 va_list args;
 
-int nTmp,jkTmp;
+int nTmp = 0;
+#ifdef DEBUG
+int jkTmp;
 unsigned long numout;
 HANDLE hStderr;
 
@@ -156,7 +156,7 @@ HANDLE hStderr;
 
 		break;
 	}
-
+#endif	// DEBUG
     va_end(args);
     return(nTmp);
 }
