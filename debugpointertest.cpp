@@ -22,6 +22,7 @@
 
 int debugpointertest ( void *x )
 {				// this code only works on linux...
+#ifdef DEBUG
 	intptr_t uP1;
 
 	uP1 = (intptr_t)x;
@@ -31,7 +32,7 @@ int debugpointertest ( void *x )
 	if (  uP1 < (intptr_t)debugheapend ) return(-1);	// pointer less than end of heap (good boy)
 	if ( uP1 > (intptr_t)debugstackend ) return(0);	// pointer above end of syack (bad boy)
 	if ( uP1 > (intptr_t)debugstackstart ) return(1);	// pointer less than end of stack and above start of stack (good boy)
-
+#endif	// DEBUG
 	return (0);	// pointer above end of heap and below start of stack (bad boy)
 }
 

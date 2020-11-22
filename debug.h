@@ -489,8 +489,7 @@ EXTERN unsigned char bdebug_flag_set[NUMDEBUGFLAGS] INITSZERO;
 
 // create dummy debugstf() and jtrunwind() macros for non-debug compiles
 #define debugstf(x) (0)
-#define jtrunwind(x) (0)
-
+//#define jtrunwind(x) (0)
 
 // create dummy color macros
 #define DBGBOLDBLACK(x)		#x

@@ -23,6 +23,7 @@
 
 int debug_read_proc_file(int idumpem) 
 {
+#ifdef DEBUG
 #define MAXPFNAMELEN	100
 	char pfname[MAXPFNAMELEN];
 	char maploc[MAXPFNAMELEN];
@@ -110,7 +111,7 @@ int debug_read_proc_file(int idumpem)
 	}
 	free(line);
 	fclose(procfile);
-
+#endif	// DEBUG
 	return 0;
 }
 

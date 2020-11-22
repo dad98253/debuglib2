@@ -22,6 +22,7 @@
 
 char * debugpointer2str ( void *x )
 {
+#ifdef DEBUG
 #define MAXDP2STR	20
 	static char msg[MAXDP2STR];
 	static char isnil[] = "-nil-";
@@ -46,7 +47,7 @@ char * debugpointer2str ( void *x )
 	}
 
 	return (iswildl);	// pointer above end of heap and below start of stack (bad boy)
-
+#endif	// DEBUG
 }
 
 #endif	// WINDOZE

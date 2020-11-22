@@ -30,6 +30,7 @@ extern int locateLineNum ( long long unsigned int lluRelAddress , char * szFunct
 char * szMainExeFile = NULL;
 
 char * jtrunwind (int icall) {
+#ifdef DEBUG
   unw_cursor_t cursor; unw_context_t uc;
   unw_word_t ip, sp;
 #define JTRUNWINDSIZE	100
@@ -58,11 +59,15 @@ char * jtrunwind (int icall) {
     j++;
   }
   return (ctemp);
+#else	// DEBUG
+  return (NULL);
+#endif	// DEBUG
 }
 
 #ifndef NODWARFLIB
 
 char * jtrunwindln (int icall) {
+#ifdef DEBUG
   unw_cursor_t cursor; unw_context_t uc;
   unw_word_t ip, sp;
 #define JTRUNWINDSIZE	100
@@ -99,6 +104,9 @@ char * jtrunwindln (int icall) {
     j++;
   }
   return (ctemp);
+#else	// DEBUG
+  return (NULL);
+#endif	// DEBUG
 }
 
 #endif	// NODWARFLIB
